@@ -87,7 +87,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

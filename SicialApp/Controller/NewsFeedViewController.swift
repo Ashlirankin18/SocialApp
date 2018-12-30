@@ -80,7 +80,6 @@ extension NewsFeedViewController:UITableViewDataSource {
             setImages(url: oneUser.picture.thumbnail, imageView: cell.userImage)
             cell.userPost.text = post.attributes.story_text
         }
-       
         return cell
     }
 }
