@@ -53,11 +53,11 @@ class ProfileViewController: UIViewController {
     }
 
    private func setUserUi(){
-        let user = universalUsers.first
-    userName.text = "\(user!.name.first.capitalized) \(user!.name.last.capitalized)"
-        userGender.text = "\(user!.gender.capitalized)"
-        userLocation.text = "\(user!.location.city.capitalized) \(user!.location.state.capitalized) \(user!.location.street.capitalized)"
-     self.name = "\(user!.name.first.capitalized) \(user!.name.last.capitalized)"
+        let user = universalUser
+    userName.text = "\(user.name.first.capitalized) \(user.name.last.capitalized)"
+    userGender.text = "\(user.gender.capitalized)"
+    userLocation.text = "\(user.location.city.capitalized) \(user.location.state.capitalized) \(user.location.street.capitalized)"
+    self.name = "\(user.name.first.capitalized) \(user.name.last.capitalized)"
     getImage()
     getRandomImage()
     getPost()

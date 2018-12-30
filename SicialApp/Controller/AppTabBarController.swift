@@ -8,6 +8,7 @@
 
 import UIKit
 var universalUsers = [Users]()
+var universalUser = universalUsers[0]
 class AppTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
