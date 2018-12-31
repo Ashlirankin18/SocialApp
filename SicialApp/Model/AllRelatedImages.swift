@@ -7,9 +7,7 @@
 //
 
 import Foundation
-struct AllRelatedImages:Codable {
-    let allImages: [ImageQualities]
-}
 struct ImageQualities:Codable {
     let filename:String
+  let id: Int
 }

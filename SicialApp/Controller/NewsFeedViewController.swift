@@ -10,16 +10,21 @@ class NewsFeedViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImage: UIImageView!
-    private var allUsers = [Users]()
-    private var currentAppUser: Users?
-    private var posts = [PostInfo](){
-        didSet{
-            DispatchQueue.main.async {
-                self.newsFeedTableView.reloadData()
-            }
-        }
+  private var allUsers = [Users]() {
+    didSet{
+      DispatchQueue.main.async {
+        self.newsFeedTableView.reloadData()
+      }
     }
-  
+  }
+    private var currentAppUser: Users?
+  private var posts = [PostInfo]() {
+    didSet {
+      DispatchQueue.main.async {
+        self.newsFeedTableView.reloadData()
+      }
+    }
+  }
     override func viewDidLoad() {
         super.viewDidLoad()
         getPost()
@@ -34,6 +39,7 @@ private func setImages(url:URL, imageView:UIImageView){
             }
             if let image = image {
                 imageView.image = image
+              
             }
         }
     }
@@ -47,10 +53,6 @@ private func getPost(){
                 self.allUsers = Array(universalUsers[1...universalUsers.count-1])
                 self.currentAppUser = universalUser
                 self.setsUpUserCredentials()
-                DispatchQueue.main.async {
-                    self.newsFeedTableView.reloadData()
-                    
-                }
             }
         }
     }
