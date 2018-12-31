@@ -43,7 +43,6 @@ class ProfileViewController: UIViewController {
             }
             if let posts = posts {
                 self.posts = posts
-   
                 DispatchQueue.main.async {
                     self.profileCollectionView.reloadData()
                 }
@@ -86,7 +85,6 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -10,7 +10,7 @@ class NewsFeedViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImage: UIImageView!
-    private var allUsers = ArraySlice<Users>()
+    private var allUsers = [Users]()
     private var currentAppUser: Users?
     private var posts = [PostInfo](){
         didSet{
@@ -27,7 +27,7 @@ class NewsFeedViewController: UIViewController {
     }
 
 
-    private func setImages(url:URL, imageView:UIImageView){
+private func setImages(url:URL, imageView:UIImageView){
         ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
             if let error = error {
                 print(error.errorMessage())
@@ -37,14 +37,14 @@ class NewsFeedViewController: UIViewController {
             }
         }
     }
-    private func getPost(){
+private func getPost(){
         UsersApiClient.getUserPost(numberOfResults: 20) { (error, posts) in
             if let error = error {
                 print(error.errorMessage())
             }
             if let posts = posts {
                 self.posts = posts
-                self.allUsers = universalUsers[1...universalUsers.count-1]
+                self.allUsers = Array(universalUsers[1...universalUsers.count-1])
                 self.currentAppUser = universalUser
                 self.setsUpUserCredentials()
                 DispatchQueue.main.async {
@@ -54,10 +54,10 @@ class NewsFeedViewController: UIViewController {
             }
         }
     }
-   private func setsUpUserCredentials(){
+private func setsUpUserCredentials(){
     self.setImages(url: (currentAppUser?.picture.large)!, imageView: self.userImage)
     DispatchQueue.main.async {
-        self.userName.text = self.currentAppUser?.name.first.capitalized
+        self.userName.text = "\(self.currentAppUser!.name.first) \(self.currentAppUser!.name.last)"
     }
     }
 }
@@ -71,15 +71,10 @@ extension NewsFeedViewController:UITableViewDataSource {
         guard let cell = newsFeedTableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as? NewFeedTableViewCell,
             allUsers.count > 0 else { return UITableViewCell()
         }
-        if indexPath.row == 0 {
-            print("No index")
-        }
-        else {
-            let oneUser = allUsers[indexPath.row]
-            cell.userName.text = "\(oneUser.name.first.capitalized) \(oneUser.name.last.capitalized)"
-            setImages(url: oneUser.picture.thumbnail, imageView: cell.userImage)
-            cell.userPost.text = post.attributes.story_text
-        }
+        let oneUser = allUsers[indexPath.row]
+        cell.userName.text = "\(oneUser.name.first.capitalized) \(oneUser.name.last.capitalized)"
+        setImages(url: oneUser.picture.thumbnail, imageView: cell.userImage)
+        cell.userPost.text = post.attributes.story_text
         return cell
     }
 }

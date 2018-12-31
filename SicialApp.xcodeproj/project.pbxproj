@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E18B4CA21D8690D0090B667 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E18B4C921D8690D0090B667 /* AppTabBarController.swift */; };
 		2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E18B4CD21D89A210090B667 /* SearchResultsViewController.swift */; };
+		2E41D32021D9C44F00BA4D22 /* AllRelatedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */; };
 		2EE3C03421D5441600B1126E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C03321D5441600B1126E /* AppDelegate.swift */; };
 		2EE3C03621D5441600B1126E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C03521D5441600B1126E /* ProfileViewController.swift */; };
 		2EE3C03921D5441600B1126E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE3C03721D5441600B1126E /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		2E18B4C921D8690D0090B667 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		2E18B4CD21D89A210090B667 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRelatedImages.swift; sourceTree = "<group>"; };
 		2EE3C03021D5441600B1126E /* SicialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SicialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE3C03321D5441600B1126E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE3C03521D5441600B1126E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -70,9 +72,9 @@
 		2E18B4CB21D896640090B667 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */,
 				2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */,
 				2EE3C05721D57B3300B1126E /* ProfileCollectionViewCell.swift */,
-				2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */,
 				2EE3C06721D7272600B1126E /* UserSearchTableViewCell.swift */,
 			);
 			path = Cells;
@@ -152,6 +154,7 @@
 		2EE3C04C21D56D9700B1126E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */,
 				2EE3C05D21D6AF8600B1126E /* DateFormatter.swift */,
 				2EE3C05921D5A4A300B1126E /* Posts.swift */,
 				2EE3C05321D56E5800B1126E /* SecretKeys.swift */,
@@ -239,6 +242,7 @@
 				2EE3C06221D6DDEF00B1126E /* NewFeedTableViewCell.swift in Sources */,
 				2EE3C05821D57B3300B1126E /* ProfileCollectionViewCell.swift in Sources */,
 				2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */,
+				2E41D32021D9C44F00BA4D22 /* AllRelatedImages.swift in Sources */,
 				2EE3C04E21D56DB600B1126E /* NetworkHelper.swift in Sources */,
 				2EE3C05C21D6AC8A00B1126E /* SearchViewController.swift in Sources */,
 				2EE3C06821D7272600B1126E /* UserSearchTableViewCell.swift in Sources */,

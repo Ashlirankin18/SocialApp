@@ -40,5 +40,21 @@ final class UsersApiClient {
             }
         }
     }
+    static func getRelatedImages(completionHandler: @escaping (AppError?,[ImageQualities]?) -> Void) {
+        let urlString = "https://picsum.photos/list"
+        NetworkHelper.performDataTask(urlString: urlString, httpMethod: "Get") { (error, data, response) in
+            if let error = error {
+                completionHandler(error,nil)
+            }
+            if let data = data {
+                do {
+              let relatedImages = try JSONDecoder().decode([ImageQualities].self, from: data)
+                    completionHandler(nil,relatedImages)
+                } catch{
+                    completionHandler(AppError.decodingError(error),nil)
+                }
+            }
+        }
+    }
 }
 
