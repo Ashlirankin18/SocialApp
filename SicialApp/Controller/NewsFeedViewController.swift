@@ -25,13 +25,16 @@ class NewsFeedViewController: UIViewController {
       }
     }
   }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         getPost()
         newsFeedTableView.dataSource = self
     }
-
-
+  private func makeList(_ n: Int) -> [Int]{
+    return (0..<n).map{_ in Int.random( in: 1...2000) }
+  }
+  
 private func setImages(url:URL, imageView:UIImageView){
         ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
             if let error = error {
@@ -59,7 +62,7 @@ private func getPost(){
 private func setsUpUserCredentials(){
     self.setImages(url: (currentAppUser?.picture.large)!, imageView: self.userImage)
     DispatchQueue.main.async {
-        self.userName.text = "\(self.currentAppUser!.name.first) \(self.currentAppUser!.name.last)"
+        self.userName.text = "\(self.currentAppUser!.name.first.capitalized) \(self.currentAppUser!.name.last.capitalized)"
     }
     }
 }
@@ -70,6 +73,8 @@ extension NewsFeedViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.row]
+        let numberOfLikes = makeList(posts.count)
+        let numberOfComments = makeList(posts.count)
         guard let cell = newsFeedTableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as? NewFeedTableViewCell,
             allUsers.count > 0 else { return UITableViewCell()
         }
@@ -77,6 +82,8 @@ extension NewsFeedViewController:UITableViewDataSource {
         cell.userName.text = "\(oneUser.name.first.capitalized) \(oneUser.name.last.capitalized)"
         setImages(url: oneUser.picture.thumbnail, imageView: cell.userImage)
         cell.userPost.text = post.attributes.story_text
+        cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
+        cell.commentButton.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
         return cell
     }
 }

@@ -85,17 +85,24 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+  private func makeList(_ n: Int) -> [Int]{
+    return (0..<n).map{_ in Int.random( in: 1...2000) }
+  }
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let numberOfLikes = makeList(posts.count)
+        let numberOfComments = makeList(posts.count)
         let post = posts[indexPath.row].attributes
         guard let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as? ProfileCollectionViewCell else {fatalError("No cell found")}
         cell.userPost.text = post.story_text
         cell.profileImage.image = profileImage
         cell.userName.text = name
+        cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
+        cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
         return cell
     }
     

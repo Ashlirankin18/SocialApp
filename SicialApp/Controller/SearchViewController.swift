@@ -28,8 +28,10 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       getUsers()
+      searchBar.delegate = self
         userImagesCollectionView.dataSource = self
     }
+  
     private func getUsers(){
         UsersApiClient.getUserInfo(numberOfResults: 993) { (error, users) in
             if let error = error {
@@ -41,6 +43,7 @@ class SearchViewController: UIViewController {
             }
         }
     }
+  
   private func getImageData(){
     UsersApiClient.getRelatedImages { (error, imageQualities) in
       if let error = error {
@@ -80,5 +83,18 @@ extension SearchViewController:UICollectionViewDataSource{
     
 }
 extension SearchViewController: UISearchBarDelegate {
-    
-}
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    if let searchText = searchBar.text {
+      let filteredUserArray = allUsers.filter{$0.name.first.capitalized.contains(searchText.capitalized)}
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      guard let vc = storyboard.instantiateViewController(withIdentifier: "searchStroyboard") as? SearchResultsViewController else {fatalError()}
+      vc.users = filteredUserArray
+      self.present(vc, animated: true, completion: nil)
+      
+    }
+  }
+
+  }
+  
+
