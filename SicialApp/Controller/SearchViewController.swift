@@ -18,7 +18,7 @@ class SearchViewController: UIViewController {
             }
         }
     }
-  private var allUsers = [Users]() {
+  private var allUsers = [User]() {
     didSet {
       DispatchQueue.main.async {
         self.userImagesCollectionView.reloadData()
@@ -28,6 +28,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       getUsers()
+      getImageData()
       searchBar.delegate = self
         userImagesCollectionView.dataSource = self
     }

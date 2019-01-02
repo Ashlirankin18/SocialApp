@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
     @IBOutlet weak var searchResultsTableView: UITableView!
-   var users = [Users]() 
+   var users = [User]() 
     override func viewDidLoad() {
         super.viewDidLoad()
       searchResultsTableView.dataSource = self

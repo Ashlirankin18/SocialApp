@@ -19,8 +19,7 @@ class ProfileViewController: UIViewController {
   
     var name = String()
     var profileImage = UIImage()
-    private var users = universalUsers
-    var generalUers: Users?
+    var user: User?
     private var posts = [PostInfo]() {
       didSet {
        DispatchQueue.main.async {
@@ -32,10 +31,14 @@ class ProfileViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUserUi()
         profileCollectionView.dataSource = self
      
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    setUserUi()
+  }
 
     private func getPost(){
         UsersApiClient.getUserPost(numberOfResults: 20) { (error, posts) in
@@ -53,7 +56,9 @@ class ProfileViewController: UIViewController {
     }
 
    private func setUserUi(){
-        let user = universalUser
+    
+    guard let user = UserSession.getUser() else { return }
+    
     userName.text = "\(user.name.first.capitalized) \(user.name.last.capitalized)"
     userGender.text = "\(user.gender.capitalized)"
     userLocation.text = "\(user.location.city.capitalized) \(user.location.state.capitalized) \(user.location.street.capitalized)"
@@ -64,8 +69,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func getImage(){
-       let user = universalUsers.first
-        ImageHelper.fetchImage(urlString: "\(user!.picture.large)") { (error, image) in
+       guard let user = UserSession.getUser() else { return }
+      ImageHelper.fetchImage(urlString: "\(user.picture.large)") { (error, image) in
             if let error = error {
                 print(error.errorMessage())
             }

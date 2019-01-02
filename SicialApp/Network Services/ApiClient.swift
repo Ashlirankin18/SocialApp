@@ -8,7 +8,7 @@
 
 import Foundation
 final class UsersApiClient {
-    static func getUserInfo(numberOfResults:Int,completionHandler: @escaping (AppError?,[Users]?) -> Void){
+    static func getUserInfo(numberOfResults:Int,completionHandler: @escaping (AppError?,[User]?) -> Void){
     let urlString = "https://randomuser.me/api/?results=\(numberOfResults)"
         NetworkHelper.performDataTask(urlString: urlString, httpMethod: "Get") { (error, data, response) in
             if let error = error {

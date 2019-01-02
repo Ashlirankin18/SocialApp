@@ -8,9 +8,9 @@
 
 import Foundation
 struct AllUsers:Codable {
-    let results: [Users]
+    let results: [User]
 }
-struct Users:Codable {
+struct User:Codable {
     let gender: String
     let name: Name
     let email: String

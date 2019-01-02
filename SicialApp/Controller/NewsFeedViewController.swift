@@ -10,14 +10,15 @@ class NewsFeedViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImage: UIImageView!
-  private var allUsers = [Users]() {
+    private var allUsers = [User]() {
     didSet{
       DispatchQueue.main.async {
         self.newsFeedTableView.reloadData()
       }
     }
   }
-    private var currentAppUser: Users?
+  var slicedArray = [User]()
+  private var currentAppUser: User?
   private var posts = [PostInfo]() {
     didSet {
       DispatchQueue.main.async {
@@ -28,14 +29,14 @@ class NewsFeedViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPost()
+      getPost()
         newsFeedTableView.dataSource = self
     }
+  
   
   private func makeList(_ n: Int) -> [Int]{
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
-  
 private func setImages(url:URL, imageView:UIImageView){
         ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
             if let error = error {
@@ -54,16 +55,35 @@ private func getPost(){
             }
             if let posts = posts {
                 self.posts = posts
-                self.allUsers = Array(universalUsers[1...universalUsers.count-1])
-                self.currentAppUser = universalUser
-                self.setsUpUserCredentials()
+                self.getUsers()
+              
             }
         }
     }
+  private func getUsers(){
+    UsersApiClient.getUserInfo(numberOfResults: 20) { (error, users) in
+      if let error = error {
+        print(error.errorMessage())
+      }
+      if var  users = users {
+        self.currentAppUser = users[0]
+        if let user = users.first {
+          UserSession.setUser(user: user)
+        }
+
+        let _ = users.removeFirst()
+        
+        self.allUsers = users
+        self.setsUpUserCredentials()
+        
+    }
+  }
+  }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let indexPath = newsFeedTableView.indexPathForSelectedRow,
       let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
-    destination.user = allUsers[indexPath.row]
+      destination.user = allUsers[indexPath.row]
+ 
   }
 
 private func setsUpUserCredentials(){

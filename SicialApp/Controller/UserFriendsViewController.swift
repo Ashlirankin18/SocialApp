@@ -11,7 +11,7 @@ import UIKit
 class UserFriendsViewController: UIViewController {
 
   @IBOutlet weak var userFriendsTableView: UITableView!
-  private var friends = [Users]() {
+  private var friends = [User]() {
     didSet{
       DispatchQueue.main.async {
         self.userFriendsTableView.reloadData()
@@ -35,9 +35,9 @@ class UserFriendsViewController: UIViewController {
     }
   }
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    guard let viewController = storyBoard.instantiateViewController(withIdentifier: "profilePage") as? ProfileViewController else {fatalError()}
-   
+    guard let indexPath = userFriendsTableView.indexPathForSelectedRow,
+      let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
+      destination.user = friends[indexPath.row]
   }
   private func getFriendImage(url:URL,imageView:UIImageView){
     ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
