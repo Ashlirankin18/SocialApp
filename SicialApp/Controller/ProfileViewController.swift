@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     var name = String()
     var profileImage = UIImage()
     private var users = universalUsers
+    var generalUers: Users?
     private var posts = [PostInfo]() {
       didSet {
        DispatchQueue.main.async {
@@ -105,5 +106,4 @@ extension ProfileViewController: UICollectionViewDataSource {
         cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
         return cell
     }
-    
 }

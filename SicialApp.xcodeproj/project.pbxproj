@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E18B4CA21D8690D0090B667 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E18B4C921D8690D0090B667 /* AppTabBarController.swift */; };
 		2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E18B4CD21D89A210090B667 /* SearchResultsViewController.swift */; };
+		2E3FA6D821DC6BB30066467E /* GeneralProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3FA6D721DC6BB30066467E /* GeneralProfileViewController.swift */; };
+		2E3FA6DA21DC76E70066467E /* GeneralUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3FA6D921DC76E70066467E /* GeneralUserTableViewCell.swift */; };
 		2E41D32021D9C44F00BA4D22 /* AllRelatedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */; };
 		2E41D32221DA2F6900BA4D22 /* UserGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E41D32121DA2F6900BA4D22 /* UserGalleryViewController.swift */; };
 		2E41D32421DA2FC900BA4D22 /* UserFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E41D32321DA2FC900BA4D22 /* UserFriendsViewController.swift */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		2E18B4C921D8690D0090B667 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 		2E18B4CD21D89A210090B667 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		2E3FA6D721DC6BB30066467E /* GeneralProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralProfileViewController.swift; sourceTree = "<group>"; };
+		2E3FA6D921DC76E70066467E /* GeneralUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUserTableViewCell.swift; sourceTree = "<group>"; };
 		2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRelatedImages.swift; sourceTree = "<group>"; };
 		2E41D32121DA2F6900BA4D22 /* UserGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGalleryViewController.swift; sourceTree = "<group>"; };
 		2E41D32321DA2FC900BA4D22 /* UserFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendsViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				2E41D32521DA305E00BA4D22 /* GalleryCollectionViewCell.swift */,
+				2E3FA6D921DC76E70066467E /* GeneralUserTableViewCell.swift */,
 				2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */,
 				2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */,
 				2EE3C05721D57B3300B1126E /* ProfileCollectionViewCell.swift */,
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				2E18B4C921D8690D0090B667 /* AppTabBarController.swift */,
+				2E3FA6D721DC6BB30066467E /* GeneralProfileViewController.swift */,
 				2EE3C04521D545C100B1126E /* NewsFeedViewController.swift */,
 				2EE3C03521D5441600B1126E /* ProfileViewController.swift */,
 				2EE3C05B21D6AC8A00B1126E /* SearchViewController.swift */,
@@ -252,12 +258,14 @@
 				2EE3C05821D57B3300B1126E /* ProfileCollectionViewCell.swift in Sources */,
 				2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */,
 				2E41D32221DA2F6900BA4D22 /* UserGalleryViewController.swift in Sources */,
+				2E3FA6DA21DC76E70066467E /* GeneralUserTableViewCell.swift in Sources */,
 				2E41D32021D9C44F00BA4D22 /* AllRelatedImages.swift in Sources */,
 				2EE3C04E21D56DB600B1126E /* NetworkHelper.swift in Sources */,
 				2EE3C05C21D6AC8A00B1126E /* SearchViewController.swift in Sources */,
 				2EE3C06821D7272600B1126E /* UserSearchTableViewCell.swift in Sources */,
 				2E18B4CA21D8690D0090B667 /* AppTabBarController.swift in Sources */,
 				2EE3C05A21D5A4A300B1126E /* Posts.swift in Sources */,
+				2E3FA6D821DC6BB30066467E /* GeneralProfileViewController.swift in Sources */,
 				2EE3C05421D56E5800B1126E /* SecretKeys.swift in Sources */,
 				2EE3C04621D545C100B1126E /* NewsFeedViewController.swift in Sources */,
 				2E41D32421DA2FC900BA4D22 /* UserFriendsViewController.swift in Sources */,

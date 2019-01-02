@@ -31,6 +31,7 @@ class NewsFeedViewController: UIViewController {
         getPost()
         newsFeedTableView.dataSource = self
     }
+  
   private func makeList(_ n: Int) -> [Int]{
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
@@ -59,6 +60,12 @@ private func getPost(){
             }
         }
     }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let indexPath = newsFeedTableView.indexPathForSelectedRow,
+      let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
+    destination.user = allUsers[indexPath.row]
+  }
+
 private func setsUpUserCredentials(){
     self.setImages(url: (currentAppUser?.picture.large)!, imageView: self.userImage)
     DispatchQueue.main.async {

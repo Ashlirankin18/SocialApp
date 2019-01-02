@@ -34,6 +34,11 @@ class UserFriendsViewController: UIViewController {
       }
     }
   }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    guard let viewController = storyBoard.instantiateViewController(withIdentifier: "profilePage") as? ProfileViewController else {fatalError()}
+   
+  }
   private func getFriendImage(url:URL,imageView:UIImageView){
     ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
       if let error = error {
@@ -56,11 +61,12 @@ extension UserFriendsViewController:UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let friendName = friends[indexPath.row].name
+    let friend = friends[indexPath.row]
      let cell = userFriendsTableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath)
     cell.textLabel!.text = "\(friendName.first.capitalized) \(friendName.last.capitalized)"
+    cell.detailTextLabel?.text = friend.location.city.capitalized
     getFriendImage(url: friends[indexPath.row].picture.large, imageView: cell.imageView!)
     return cell
   }
-  
   
 }
