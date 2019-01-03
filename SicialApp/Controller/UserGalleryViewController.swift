@@ -11,18 +11,18 @@ import UIKit
 class UserGalleryViewController: UIViewController {
   @IBOutlet weak var userGallaryCollectionView: UICollectionView!
   
- private var galleryImages = [ImageQualities]() {
+  private var galleryImages = [ImageQualities]() {
     didSet {
       DispatchQueue.main.async {
         self.userGallaryCollectionView.reloadData()
       }
     }
   }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      getUserGalleryImageData()
-      userGallaryCollectionView.dataSource = self
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    getUserGalleryImageData()
+    userGallaryCollectionView.dataSource = self
+  }
   private func getUserGalleryImageData(){
     UsersApiClient.getRelatedImages { (error, images) in
       if let error = error {
@@ -30,7 +30,6 @@ class UserGalleryViewController: UIViewController {
       }
       if let images = images {
         self.galleryImages = images.filter{$0.id % 2 == 0 && $0.id < 100}
-        dump(images)
       }
     }
   }

@@ -83,8 +83,8 @@
 				2E41D32521DA305E00BA4D22 /* GalleryCollectionViewCell.swift */,
 				2E3FA6D921DC76E70066467E /* GeneralUserTableViewCell.swift */,
 				2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */,
-				2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */,
 				2EE3C05721D57B3300B1126E /* ProfileCollectionViewCell.swift */,
+				2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */,
 				2EE3C06721D7272600B1126E /* UserSearchTableViewCell.swift */,
 			);
 			path = Cells;

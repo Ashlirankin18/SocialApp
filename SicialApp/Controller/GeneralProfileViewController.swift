@@ -24,12 +24,12 @@ class GeneralProfileViewController: UIViewController {
     }
   }
   
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      setUi()
-      generalUserTableView.dataSource = self
-      generalUserTableView.delegate = self
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setUi()
+    generalUserTableView.dataSource = self
+    generalUserTableView.delegate = self
+  }
   override func viewDidAppear(_ animated: Bool) {
     getPost()
   }
@@ -69,14 +69,6 @@ class GeneralProfileViewController: UIViewController {
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
   @IBAction func likeButton(_ sender: UIButton) {
-    
-    if let cell = sender.superview?.superview as? GeneralUserTableViewCell {
-      if let indexPath = generalUserTableView.indexPath(for: cell) {
-        let post = posts[indexPath.row]
-        print(post.attributes.story_text)
-      }
-    }
-    
     sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-25.png"), for: .normal)
   }
   @IBAction func commentButton(_ sender: UIButton) {
@@ -93,9 +85,9 @@ extension GeneralProfileViewController:UITableViewDataSource {
     let numberOfLikes = makeList(posts.count)
     let numberOfComments = makeList(posts.count)
     guard let cell = generalUserTableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as? GeneralUserTableViewCell else {fatalError()}
-  let post = posts[indexPath.row].attributes
+    let post = posts[indexPath.row].attributes
     getUserImage(url: (user?.picture.large.absoluteString)!, imageView: cell.userImage)
-  cell.userPost.text = post.story_text
+    cell.userPost.text = post.story_text
     cell.userName.text = "\(user!.name.first.capitalized) \(user!.name.last.capitalized)"
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     cell.commentButton.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
