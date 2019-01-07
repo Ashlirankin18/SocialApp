@@ -35,7 +35,7 @@ class GeneralProfileViewController: UIViewController {
   }
   
   private func getUserImage(url:String,imageView:UIImageView){
-    ImageHelper.fetchImage(urlString: url) { (error, image) in
+    ImageHelper.shared.fetchImage(urlString: url) { (error, image) in
       if let error = error {
         print(error.errorMessage())
       }
@@ -51,7 +51,6 @@ class GeneralProfileViewController: UIViewController {
       }
       if let posts = posts{
         self.posts = posts
-        dump(posts)
       }
     }
   }
@@ -70,7 +69,14 @@ class GeneralProfileViewController: UIViewController {
   }
   @IBAction func likeButton(_ sender: UIButton) {
     sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-25.png"), for: .normal)
+    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
+    if let likeUnwrapped = like.first {
+      guard let likeInt = Int(likeUnwrapped) else {return}
+      let increasedLike = likeInt + 1
+      sender.setTitle("\(increasedLike) Likes", for: .normal)
+    }
   }
+  
   @IBAction func commentButton(_ sender: UIButton) {
     sender.setImage(#imageLiteral(resourceName: "icons8-comments-filled-25.png"), for: .normal)
   }

@@ -8,54 +8,60 @@
 
 import UIKit
 class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var profileCollectionView: UICollectionView!
-    @IBOutlet weak var userProfileImage: UIImageView!
-    @IBOutlet weak var userCoverPhoto: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userGender: UILabel!
-    @IBOutlet weak var userLocation: UILabel!
-
   
-    var name = String()
-    var profileImage = UIImage()
-    var user: User?
-    private var posts = [PostInfo]() {
-      didSet {
-       DispatchQueue.main.async {
-      self.profileCollectionView.reloadData()
-           }
-        }
+  @IBOutlet weak var profileCollectionView: UICollectionView!
+  @IBOutlet weak var userProfileImage: UIImageView!
+  @IBOutlet weak var userCoverPhoto: UIImageView!
+  @IBOutlet weak var userName: UILabel!
+  @IBOutlet weak var userGender: UILabel!
+  @IBOutlet weak var userLocation: UILabel!
+  var name = String()
+  var profileImage = UIImage()
+  var user: User?
+  private var posts = [PostInfo]() {
+    didSet {
+      DispatchQueue.main.async {
+        self.profileCollectionView.reloadData()
+      }
     }
+  }
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    profileCollectionView.dataSource = self
     
-  
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        profileCollectionView.dataSource = self
-     
-    }
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     setUserUi()
   }
-
-    private func getPost(){
-        UsersApiClient.getUserPost(numberOfResults: 20) { (error, posts) in
-            if let error = error {
-                print(error.errorMessage())
-            }
-            if let posts = posts {
-                self.posts = posts
-                DispatchQueue.main.async {
-                    self.profileCollectionView.reloadData()
-                }
-                
-            }
+  @IBAction func likeButton(_ sender: UIButton) {
+    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-25.png"), for: .normal)
+    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
+    if let likeUnwrapped = like.first {
+      guard let likeInt = Int(likeUnwrapped) else {return}
+      let increasedLike = likeInt + 1
+      sender.setTitle("\(increasedLike) Likes", for: .normal)
+  }
+  }
+  private func getPost(){
+    UsersApiClient.getUserPost(numberOfResults: 20) { (error, posts) in
+      if let error = error {
+        print(error.errorMessage())
+      }
+      if let posts = posts {
+        self.posts = posts
+        DispatchQueue.main.async {
+          self.profileCollectionView.reloadData()
         }
+        
+      }
     }
-
-   private func setUserUi(){
+  }
+  
+  private func setUserUi(){
     
     guard let user = UserSession.getUser() else { return }
     
@@ -66,49 +72,49 @@ class ProfileViewController: UIViewController {
     getImage()
     getRandomImage()
     getPost()
+  }
+  
+  private func getImage(){
+    guard let user = UserSession.getUser() else { return }
+    ImageHelper.shared.fetchImage(urlString: "\(user.picture.large)") { (error, image) in
+      if let error = error {
+        print(error.errorMessage())
+      }
+      if let image = image {
+        self.userProfileImage.image = image
+        self.profileImage = image
+      }
     }
-    
-    private func getImage(){
-       guard let user = UserSession.getUser() else { return }
-      ImageHelper.fetchImage(urlString: "\(user.picture.large)") { (error, image) in
-            if let error = error {
-                print(error.errorMessage())
-            }
-            if let image = image {
-                self.userProfileImage.image = image
-                self.profileImage = image
-            }
-        }
+  }
+  private func getRandomImage(){
+    let urlString = "https://picsum.photos/400/300/?random"
+    ImageHelper.shared.fetchImage(urlString: urlString) { (error, image) in
+      if let error = error{
+        print(error.errorMessage())
+      }
+      if let image = image {
+        self.userCoverPhoto.image = image
+      }
     }
-    private func getRandomImage(){
-        let urlString = "https://picsum.photos/400/300/?random"
-        ImageHelper.fetchImage(urlString: urlString) { (error, image) in
-            if let error = error{
-                print(error.errorMessage())
-            }
-            if let image = image {
-                self.userCoverPhoto.image = image
-            }
-        }
-    }
+  }
   private func makeList(_ n: Int) -> [Int]{
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
 }
 extension ProfileViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let numberOfLikes = makeList(posts.count)
-        let numberOfComments = makeList(posts.count)
-        let post = posts[indexPath.row].attributes
-        guard let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as? ProfileCollectionViewCell else {fatalError("No cell found")}
-        cell.userPost.text = post.story_text
-        cell.profileImage.image = profileImage
-        cell.userName.text = name
-        cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
-        cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
-        return cell
-    }
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return posts.count
+  }
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let numberOfLikes = makeList(posts.count)
+    let numberOfComments = makeList(posts.count)
+    let post = posts[indexPath.row].attributes
+    guard let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as? ProfileCollectionViewCell else {fatalError("No cell found")}
+    cell.userPost.text = post.story_text
+    cell.profileImage.image = profileImage
+    cell.userName.text = name
+    cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
+    cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
+    return cell
+  }
 }

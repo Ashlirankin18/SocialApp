@@ -15,12 +15,5 @@ class NewFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var userPost: UITextView!
     @IBOutlet weak var postPublishedData: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-   
-    }
-   
-    
-
+ 
 }

@@ -9,18 +9,19 @@
 import UIKit
 
 class SearchResultsViewController: UIViewController {
-    @IBOutlet weak var searchResultsTableView: UITableView!
-   var users = [User]() 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      searchResultsTableView.dataSource = self
-    }
+  @IBOutlet weak var searchResultsTableView: UITableView!
+  var users = [User]() 
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    searchResultsTableView.dataSource = self
+  }
   @IBAction func dismissButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
   
   private func getUserImage(url:URL,imageView:UIImageView){
-    ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
+    ImageHelper.shared.fetchImage(urlString: url.absoluteString) { (error, image) in
       if let error = error {
         print(error.errorMessage())
       }

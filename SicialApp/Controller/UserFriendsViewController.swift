@@ -9,7 +9,7 @@
 import UIKit
 
 class UserFriendsViewController: UIViewController {
-
+  
   @IBOutlet weak var userFriendsTableView: UITableView!
   private var friends = [User]() {
     didSet{
@@ -23,7 +23,8 @@ class UserFriendsViewController: UIViewController {
     super.viewDidLoad()
     getuserFriends()
     userFriendsTableView.dataSource = self
-    }
+  }
+  
   private func getuserFriends(){
     UsersApiClient.getUserInfo(numberOfResults: 1200) { (error, friends) in
       if let error = error {
@@ -37,10 +38,10 @@ class UserFriendsViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let indexPath = userFriendsTableView.indexPathForSelectedRow,
       let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
-      destination.user = friends[indexPath.row]
+    destination.user = friends[indexPath.row]
   }
   private func getFriendImage(url:URL,imageView:UIImageView){
-    ImageHelper.fetchImage(urlString: url.absoluteString) { (error, image) in
+    ImageHelper.shared.fetchImage(urlString: url.absoluteString) { (error, image) in
       if let error = error {
         print(error.errorMessage())
       }
@@ -52,7 +53,6 @@ class UserFriendsViewController: UIViewController {
       }
     }
   }
-
 }
 extension UserFriendsViewController:UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,11 +62,10 @@ extension UserFriendsViewController:UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let friendName = friends[indexPath.row].name
     let friend = friends[indexPath.row]
-     let cell = userFriendsTableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath)
+    let cell = userFriendsTableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath)
     cell.textLabel!.text = "\(friendName.first.capitalized) \(friendName.last.capitalized)"
     cell.detailTextLabel?.text = friend.location.city.capitalized
     getFriendImage(url: friends[indexPath.row].picture.large, imageView: cell.imageView!)
     return cell
   }
-  
 }

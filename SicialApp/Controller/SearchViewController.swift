@@ -8,16 +8,17 @@
 
 import UIKit
 class SearchViewController: UIViewController {
-    @IBOutlet weak var userImagesCollectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    
-    private var allPlatformImages = [ImageQualities](){
-        didSet{
-            DispatchQueue.main.async{
-                self.userImagesCollectionView.reloadData()
-            }
-        }
+  @IBOutlet weak var userImagesCollectionView: UICollectionView!
+  @IBOutlet weak var searchBar: UISearchBar!
+  
+  
+  private var allPlatformImages = [ImageQualities](){
+    didSet{
+      DispatchQueue.main.async{
+        self.userImagesCollectionView.reloadData()
+      }
     }
+  }
   private var allUsers = [User]() {
     didSet {
       DispatchQueue.main.async {
@@ -25,26 +26,34 @@ class SearchViewController: UIViewController {
       }
     }
   }
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      getUsers()
-      getImageData()
-      searchBar.delegate = self
-        userImagesCollectionView.dataSource = self
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    getUsers()
+    getImageData()
+    searchBar.delegate = self
+    userImagesCollectionView.dataSource = self
+  }
   
-    private func getUsers(){
-        UsersApiClient.getUserInfo(numberOfResults: 993) { (error, users) in
-            if let error = error {
-                print(error.errorMessage())
-            }
-            if let users = users {
-              self.allUsers = users
-               self.getImageData()
-            }
-        }
+  private func getUsers(){
+    UsersApiClient.getUserInfo(numberOfResults: 993) { (error, users) in
+      if let error = error {
+        print(error.errorMessage())
+      }
+      if let users = users {
+        self.allUsers = users
+        self.getImageData()
+      }
     }
-  
+  }
+  @IBAction func likeButton(_ sender: UIButton) {
+    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (3).png"), for: .normal)
+    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
+    if let likeUnwrapped = like.first {
+      guard let likeInt = Int(likeUnwrapped) else {return}
+      let increasedLike = likeInt + 1
+      sender.setTitle("\(increasedLike) Likes", for: .normal)
+  }
+  }
   private func getImageData(){
     UsersApiClient.getRelatedImages { (error, imageQualities) in
       if let error = error {
@@ -57,29 +66,34 @@ class SearchViewController: UIViewController {
   }
   func searchImages(id:Int,imageView:UIImageView){
     let urlString = "https://picsum.photos/200/300?image=\(id)"
-    ImageHelper.fetchImage(urlString: urlString) { (error, image) in
+    ImageHelper.shared.fetchImage(urlString: urlString) { (error, image) in
       if let error = error {
         print(error.errorMessage())
       }
       if let image = image {
         DispatchQueue.main.async {
-           imageView.image = image
+          imageView.image = image
         }
       }
     }
   }
+  private func makeList(_ n: Int) -> [Int]{
+    return (0..<n).map{_ in Int.random( in: 1...2000) }
+  }
 }
 extension SearchViewController:UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return  allPlatformImages.count
-    }
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return  allPlatformImages.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let numberOfLikes = makeList(allPlatformImages.count)
+    guard let cell = userImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as? RelatedImagesCollectionViewCell else {fatalError("No cell found")}
+    cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
+    searchImages(id: allPlatformImages[indexPath.row].id, imageView: cell.userImage)
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = userImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as? RelatedImagesCollectionViewCell else {fatalError("No cell found")}
-      searchImages(id: allPlatformImages[indexPath.row].id, imageView: cell.userImage)
-      
-        return cell
-    }
+    return cell
+  }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -94,7 +108,6 @@ extension SearchViewController: UISearchBarDelegate {
       
     }
   }
+}
 
-  }
-  
 

@@ -33,9 +33,23 @@ class UserGalleryViewController: UIViewController {
       }
     }
   }
+  private func makeList(_ n: Int) -> [Int]{
+    return (0..<n).map{_ in Int.random( in: 1...2000) }
+  }
+  
+  @IBAction func likeButtonPressed(_ sender: UIButton) {
+    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (3).png"), for: .normal)
+    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
+    if let likeUnwrapped = like.first {
+      guard let likeInt = Int(likeUnwrapped) else {return}
+      let increasedLike = likeInt + 1
+      sender.setTitle("\(increasedLike) Likes", for: .normal)
+    }
+  }
+  
   private func getUserGalleryImages(id:Int,imageView:UIImageView){
     let urlString = "https://picsum.photos/200/300?image=\(id)"
-    ImageHelper.fetchImage(urlString: urlString) { (error, image) in
+    ImageHelper.shared.fetchImage(urlString: urlString) { (error, image) in
       if let error = error {
         print(error.errorMessage())
       }
@@ -51,10 +65,10 @@ extension UserGalleryViewController:UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let numberOfLikes = makeList(galleryImages.count)
     guard let cell = userGallaryCollectionView.dequeueReusableCell(withReuseIdentifier: "galleryCell", for: indexPath) as? GalleryCollectionViewCell else {fatalError("No Cell Found")}
     getUserGalleryImages(id: galleryImages[indexPath.row].id, imageView: cell.galleryCell)
+    cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     return cell
   }
-  
-  
 }

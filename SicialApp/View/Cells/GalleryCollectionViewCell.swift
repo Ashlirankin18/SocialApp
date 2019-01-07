@@ -10,5 +10,6 @@ import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var galleryCell: UIImageView!
+  @IBOutlet weak var likeButton: UIButton!
   
 }
