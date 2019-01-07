@@ -100,6 +100,16 @@ class ProfileViewController: UIViewController {
   private func makeList(_ n: Int) -> [Int]{
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
+  private func convertTheDate(timeInterval:Double) -> String{
+    let timeInterval = timeInterval
+    let date = Date(timeIntervalSince1970: timeInterval)
+    let dateFormater = DateFormatter()
+    dateFormater.timeZone = TimeZone(abbreviation: "GMT")
+    dateFormater.locale = NSLocale.current
+    dateFormater.dateFormat = "yyyy-MM-dd HH:mm"
+    let strDate = dateFormater.string(from: date)
+    return strDate
+  }
 }
 extension ProfileViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,6 +125,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     cell.userName.text = name
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
+    cell.publishedDate.text = convertTheDate(timeInterval: Double(post.publish_date)!)
     return cell
   }
 }

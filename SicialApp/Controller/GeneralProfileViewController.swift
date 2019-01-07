@@ -31,9 +31,6 @@ class GeneralProfileViewController: UIViewController {
     generalUserTableView.dataSource = self
     generalUserTableView.delegate = self
   }
-  override func viewDidAppear(_ animated: Bool) {
-    //getPost()
-  }
   
   private func getUserImage(url:String,imageView:UIImageView){
     ImageHelper.shared.fetchImage(urlString: url) { (error, image) in
@@ -110,9 +107,11 @@ extension GeneralProfileViewController:UITableViewDataSource {
     cell.publishedDate.text = convertTheDate(timeInterval: Double(post.publish_date)!)
     return cell
   }
+  
 }
 extension GeneralProfileViewController:UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 250
   }
+
 }

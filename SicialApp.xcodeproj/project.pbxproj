@@ -17,6 +17,9 @@
 		2E4BE6CC21DD4B71000D296D /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4BE6CB21DD4B71000D296D /* UserSession.swift */; };
 		2E9C4B0C21E2C42E00341025 /* CommentPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4B0B21E2C42E00341025 /* CommentPost.swift */; };
 		2E9C4B0E21E2C78700341025 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4B0D21E2C78700341025 /* CommentsViewController.swift */; };
+		2E9C4B1021E3B2E200341025 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4B0F21E3B2E200341025 /* FavoritesViewController.swift */; };
+		2E9C4B1221E3B72400341025 /* FavoritePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4B1121E3B72400341025 /* FavoritePostCollectionViewCell.swift */; };
+		2E9C4B1421E3B85000341025 /* FavoriteImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9C4B1321E3B85000341025 /* FavoriteImageCollectionViewCell.swift */; };
 		2EE3C03421D5441600B1126E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C03321D5441600B1126E /* AppDelegate.swift */; };
 		2EE3C03621D5441600B1126E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C03521D5441600B1126E /* ProfileViewController.swift */; };
 		2EE3C03921D5441600B1126E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE3C03721D5441600B1126E /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 		2E4BE6CB21DD4B71000D296D /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		2E9C4B0B21E2C42E00341025 /* CommentPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPost.swift; sourceTree = "<group>"; };
 		2E9C4B0D21E2C78700341025 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		2E9C4B0F21E3B2E200341025 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		2E9C4B1121E3B72400341025 /* FavoritePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E9C4B1321E3B85000341025 /* FavoriteImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EE3C03021D5441600B1126E /* SicialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SicialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE3C03321D5441600B1126E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE3C03521D5441600B1126E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				2EE3C03721D5441600B1126E /* Main.storyboard */,
+				2E9C4B1321E3B85000341025 /* FavoriteImageCollectionViewCell.swift */,
+				2E9C4B1121E3B72400341025 /* FavoritePostCollectionViewCell.swift */,
+				2E9C4B0F21E3B2E200341025 /* FavoritesViewController.swift */,
 				2E18B4CB21D896640090B667 /* Cells */,
 			);
 			path = View;
@@ -255,8 +264,10 @@
 				2EE3C05021D56DD800B1126E /* AppError.swift in Sources */,
 				2EE3C06221D6DDEF00B1126E /* NewFeedTableViewCell.swift in Sources */,
 				2EE3C05821D57B3300B1126E /* ProfileCollectionViewCell.swift in Sources */,
+				2E9C4B1421E3B85000341025 /* FavoriteImageCollectionViewCell.swift in Sources */,
 				2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */,
 				2E41D32221DA2F6900BA4D22 /* UserGalleryViewController.swift in Sources */,
+				2E9C4B1021E3B2E200341025 /* FavoritesViewController.swift in Sources */,
 				2E3FA6DA21DC76E70066467E /* GeneralUserTableViewCell.swift in Sources */,
 				2E9C4B0C21E2C42E00341025 /* CommentPost.swift in Sources */,
 				2E41D32021D9C44F00BA4D22 /* AllRelatedImages.swift in Sources */,
@@ -266,6 +277,7 @@
 				2E4BE6CC21DD4B71000D296D /* UserSession.swift in Sources */,
 				2EE3C05A21D5A4A300B1126E /* Posts.swift in Sources */,
 				2E3FA6D821DC6BB30066467E /* GeneralProfileViewController.swift in Sources */,
+				2E9C4B1221E3B72400341025 /* FavoritePostCollectionViewCell.swift in Sources */,
 				2EE3C04621D545C100B1126E /* NewsFeedViewController.swift in Sources */,
 				2E41D32421DA2FC900BA4D22 /* UserFriendsViewController.swift in Sources */,
 				2EE3C05621D5703900B1126E /* UserModel.swift in Sources */,

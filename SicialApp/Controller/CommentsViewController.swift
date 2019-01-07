@@ -87,6 +87,7 @@ extension CommentsViewController:UITextFieldDelegate{
     } catch {
       print("Encoding Error: \(error)")
     }
+    getComments()
     return true
   }
 }

@@ -14,5 +14,6 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userPost: UITextView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var comment: UIButton!
-    
+  @IBOutlet weak var publishedDate: UILabel!
+  
 }
