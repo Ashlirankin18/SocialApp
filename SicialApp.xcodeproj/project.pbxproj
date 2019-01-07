@@ -31,7 +31,6 @@
 		2EE3C05821D57B3300B1126E /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C05721D57B3300B1126E /* ProfileCollectionViewCell.swift */; };
 		2EE3C05A21D5A4A300B1126E /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C05921D5A4A300B1126E /* Posts.swift */; };
 		2EE3C05C21D6AC8A00B1126E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C05B21D6AC8A00B1126E /* SearchViewController.swift */; };
-		2EE3C05E21D6AF8600B1126E /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C05D21D6AF8600B1126E /* DateFormatter.swift */; };
 		2EE3C06221D6DDEF00B1126E /* NewFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */; };
 		2EE3C06621D7268700B1126E /* RelatedImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */; };
 		2EE3C06821D7272600B1126E /* UserSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3C06721D7272600B1126E /* UserSearchTableViewCell.swift */; };
@@ -64,7 +63,6 @@
 		2EE3C05721D57B3300B1126E /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EE3C05921D5A4A300B1126E /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		2EE3C05B21D6AC8A00B1126E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		2EE3C05D21D6AF8600B1126E /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		2EE3C06121D6DDEF00B1126E /* NewFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedTableViewCell.swift; sourceTree = "<group>"; };
 		2EE3C06521D7268700B1126E /* RelatedImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EE3C06721D7272600B1126E /* UserSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				2E41D31F21D9C44F00BA4D22 /* AllRelatedImages.swift */,
-				2EE3C05D21D6AF8600B1126E /* DateFormatter.swift */,
 				2EE3C05921D5A4A300B1126E /* Posts.swift */,
 				2EE3C05521D5703900B1126E /* UserModel.swift */,
 				2E9C4B0B21E2C42E00341025 /* CommentPost.swift */,
@@ -256,7 +253,6 @@
 				2EE3C03621D5441600B1126E /* ProfileViewController.swift in Sources */,
 				2EE3C03421D5441600B1126E /* AppDelegate.swift in Sources */,
 				2EE3C05021D56DD800B1126E /* AppError.swift in Sources */,
-				2EE3C05E21D6AF8600B1126E /* DateFormatter.swift in Sources */,
 				2EE3C06221D6DDEF00B1126E /* NewFeedTableViewCell.swift in Sources */,
 				2EE3C05821D57B3300B1126E /* ProfileCollectionViewCell.swift in Sources */,
 				2E18B4CE21D89A210090B667 /* SearchResultsViewController.swift in Sources */,

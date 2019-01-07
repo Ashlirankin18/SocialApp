@@ -45,7 +45,6 @@ class NewsFeedViewController: UIViewController {
     }
   }
   @IBAction func commentButtonPressed(_ sender: UIButton) {
-    sender.setImage(#imageLiteral(resourceName: "icons8-comments-filled-25.png"), for: .normal)
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
     let vc =  storyBoard.instantiateViewController(withIdentifier: "commentController")
     self.present(vc, animated: true, completion: nil)
@@ -97,6 +96,7 @@ class NewsFeedViewController: UIViewController {
       }
     }
   }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let indexPath = newsFeedTableView.indexPathForSelectedRow,
       let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
@@ -109,6 +109,16 @@ class NewsFeedViewController: UIViewController {
     DispatchQueue.main.async {
       self.userName.text = "\(self.currentAppUser!.name.first.capitalized) \(self.currentAppUser!.name.last.capitalized)"
     }
+  }
+  private func convertTheDate(timeInterval:Double) -> String{
+    let timeInterval = timeInterval
+    let date = Date(timeIntervalSince1970: timeInterval)
+    let dateFormater = DateFormatter()
+    dateFormater.timeZone = TimeZone(abbreviation: "GMT")
+    dateFormater.locale = NSLocale.current
+    dateFormater.dateFormat = "yyyy-MM-dd HH:mm"
+    let strDate = dateFormater.string(from: date)
+    return strDate
   }
 }
 extension NewsFeedViewController:UITableViewDataSource {
@@ -128,6 +138,7 @@ extension NewsFeedViewController:UITableViewDataSource {
     cell.userPost.text = post.attributes.story_text
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     cell.commentButton.setTitle("Comments", for: .normal)
+    cell.postPublishedData.text = convertTheDate(timeInterval: Double(post.attributes.publish_date)!)
     return cell
   }
 }

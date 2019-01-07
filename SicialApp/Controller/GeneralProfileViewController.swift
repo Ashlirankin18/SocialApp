@@ -27,11 +27,12 @@ class GeneralProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUi()
+     getPost()
     generalUserTableView.dataSource = self
     generalUserTableView.delegate = self
   }
   override func viewDidAppear(_ animated: Bool) {
-    getPost()
+    //getPost()
   }
   
   private func getUserImage(url:String,imageView:UIImageView){
@@ -80,6 +81,16 @@ class GeneralProfileViewController: UIViewController {
   @IBAction func commentButton(_ sender: UIButton) {
     sender.setImage(#imageLiteral(resourceName: "icons8-comments-filled-25.png"), for: .normal)
   }
+  private func convertTheDate(timeInterval:Double) -> String{
+    let timeInterval = timeInterval
+    let date = Date(timeIntervalSince1970: timeInterval)
+    let dateFormater = DateFormatter()
+    dateFormater.timeZone = TimeZone(abbreviation: "GMT")
+    dateFormater.locale = NSLocale.current
+    dateFormater.dateFormat = "yyyy-MM-dd HH:mm"
+    let strDate = dateFormater.string(from: date)
+    return strDate
+  }
   
 }
 extension GeneralProfileViewController:UITableViewDataSource {
@@ -96,6 +107,7 @@ extension GeneralProfileViewController:UITableViewDataSource {
     cell.userName.text = "\(user!.name.first.capitalized) \(user!.name.last.capitalized)"
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     cell.commentButton.setTitle("Comments", for: .normal)
+    cell.publishedDate.text = convertTheDate(timeInterval: Double(post.publish_date)!)
     return cell
   }
 }

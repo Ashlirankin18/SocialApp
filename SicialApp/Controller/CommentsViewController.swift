@@ -25,9 +25,11 @@ class CommentsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getComments()
     commentTextField.delegate = self
     commentTableView.dataSource = self
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    getComments()
   }
   
   private func setUpAlertControl(title:String,message:String){
