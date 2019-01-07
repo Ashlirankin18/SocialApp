@@ -13,7 +13,7 @@
         <!--Comments View Controller-->
         <scene sceneID="9t1-MX-SJI">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="fRU-bt-v9I" customClass="CommentsViewController" customModule="SicialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="commentController" modalPresentationStyle="overCurrentContext" id="fRU-bt-v9I" customClass="CommentsViewController" customModule="SicialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ptU-UI-6zk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3dG-47-Trf">
-                                <rect key="frame" x="0.0" y="88" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="736"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" textLabel="mgg-GA-Ebd" detailTextLabel="c7e-C2-zOW" style="IBUITableViewCellStyleSubtitle" id="ETN-6k-EQM">
@@ -61,7 +61,7 @@
                                 </prototypes>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Comment" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EZC-6s-i2y">
-                                <rect key="frame" x="0.0" y="783" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="832" width="414" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -501,7 +501,7 @@
         <!--Title-->
         <scene sceneID="r47-7T-SZ1">
             <objects>
-                <viewController storyboardIdentifier="searchStroyboard" id="40g-nc-n4M" customClass="SearchResultsViewController" customModule="SicialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchStroyboard" modalPresentationStyle="overCurrentContext" id="40g-nc-n4M" customClass="SearchResultsViewController" customModule="SicialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="04L-ys-yjh" customClass="UIButton">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -533,6 +533,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Pzf-ZK-HLB" kind="presentation" id="du2-ob-C87"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -657,7 +660,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BrC-kl-UYG">
-                                                    <rect key="frame" x="167" y="243" width="207" height="22"/>
+                                                    <rect key="frame" x="167" y="239" width="207" height="26"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="207" id="6Wg-lL-Vsm"/>
@@ -666,7 +669,7 @@
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="commentButtonPressed:" destination="Yr4-Xg-ori" eventType="touchUpInside" id="LCR-lV-6id"/>
+                                                        <action selector="commentButtonPressed:" destination="Yr4-Xg-ori" eventType="touchUpInside" id="JIM-bx-UUw"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -688,13 +691,13 @@
                                                 <constraint firstItem="KCL-j4-n7V" firstAttribute="leading" secondItem="qfx-5R-GeH" secondAttribute="leadingMargin" id="e2i-BA-mQi"/>
                                                 <constraint firstItem="KCL-j4-n7V" firstAttribute="top" secondItem="Wfz-g1-vU3" secondAttribute="bottom" constant="2" id="lSQ-pW-at3"/>
                                                 <constraint firstItem="BrC-kl-UYG" firstAttribute="trailing" secondItem="V2K-of-8aI" secondAttribute="trailing" constant="293" id="mJI-sd-JRy"/>
-                                                <constraint firstItem="BrC-kl-UYG" firstAttribute="baseline" secondItem="KCL-j4-n7V" secondAttribute="baseline" constant="-2" id="mjU-jB-bUF"/>
+                                                <constraint firstItem="BrC-kl-UYG" firstAttribute="baseline" secondItem="KCL-j4-n7V" secondAttribute="baseline" constant="-4" id="mjU-jB-bUF"/>
                                                 <constraint firstItem="KCL-j4-n7V" firstAttribute="bottom" secondItem="BrC-kl-UYG" secondAttribute="bottom" id="nvC-jk-S4U"/>
                                                 <constraint firstItem="Wfz-g1-vU3" firstAttribute="top" secondItem="V2K-of-8aI" secondAttribute="bottom" constant="8" id="p78-iR-yyW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="commentButton" destination="BrC-kl-UYG" id="Vml-5U-EWX"/>
+                                            <outlet property="commentButton" destination="BrC-kl-UYG" id="I7Y-nj-lDM"/>
                                             <outlet property="likeButton" destination="KCL-j4-n7V" id="VN8-D9-F6t"/>
                                             <outlet property="postPublishedData" destination="R16-pP-P27" id="Gi6-L9-503"/>
                                             <outlet property="userImage" destination="V2K-of-8aI" id="IWd-wV-Wi1"/>
@@ -1056,7 +1059,7 @@
         <image name="icons8-user-25" width="18.75" height="18.75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ft1-53-0wS"/>
-        <segue reference="aan-2U-D90"/>
+        <segue reference="du2-ob-C87"/>
+        <segue reference="wLw-GH-N3J"/>
     </inferredMetricsTieBreakers>
 </document>

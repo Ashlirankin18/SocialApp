@@ -46,6 +46,9 @@ class NewsFeedViewController: UIViewController {
   }
   @IBAction func commentButtonPressed(_ sender: UIButton) {
     sender.setImage(#imageLiteral(resourceName: "icons8-comments-filled-25.png"), for: .normal)
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    let vc =  storyBoard.instantiateViewController(withIdentifier: "commentController")
+    self.present(vc, animated: true, completion: nil)
   }
   
   
@@ -116,7 +119,6 @@ extension NewsFeedViewController:UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let post = posts[indexPath.row]
     let numberOfLikes = makeList(posts.count)
-    let numberOfComments = makeList(posts.count)
     guard let cell = newsFeedTableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as? NewFeedTableViewCell,
       allUsers.count > 0 else { return UITableViewCell()
     }
@@ -125,7 +127,7 @@ extension NewsFeedViewController:UITableViewDataSource {
     setImages(url: oneUser.picture.thumbnail, imageView: cell.userImage)
     cell.userPost.text = post.attributes.story_text
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
-    cell.commentButton.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
+    cell.commentButton.setTitle("Comments", for: .normal)
     return cell
   }
 }

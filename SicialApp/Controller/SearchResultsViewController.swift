@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
   @IBOutlet weak var searchResultsTableView: UITableView!
-  var users = [User]() 
+  var users = [User]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,6 +20,11 @@ class SearchResultsViewController: UIViewController {
     dismiss(animated: true, completion: nil)
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let indexPath = searchResultsTableView.indexPathForSelectedRow,
+      let destination = segue.destination as? GeneralProfileViewController else {fatalError()}
+    destination.user = users[indexPath.row]
+  }
   private func getUserImage(url:URL,imageView:UIImageView){
     ImageHelper.shared.fetchImage(urlString: url.absoluteString) { (error, image) in
       if let error = error {

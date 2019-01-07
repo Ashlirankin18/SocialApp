@@ -89,14 +89,13 @@ extension GeneralProfileViewController:UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let numberOfLikes = makeList(posts.count)
-    let numberOfComments = makeList(posts.count)
     guard let cell = generalUserTableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as? GeneralUserTableViewCell else {fatalError()}
     let post = posts[indexPath.row].attributes
     getUserImage(url: (user?.picture.large.absoluteString)!, imageView: cell.userImage)
     cell.userPost.text = post.story_text
     cell.userName.text = "\(user!.name.first.capitalized) \(user!.name.last.capitalized)"
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
-    cell.commentButton.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
+    cell.commentButton.setTitle("Comments", for: .normal)
     return cell
   }
 }

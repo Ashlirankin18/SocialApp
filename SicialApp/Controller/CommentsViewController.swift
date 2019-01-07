@@ -16,17 +16,19 @@ class CommentsViewController: UIViewController {
   private var comments = [Comments]() {
     didSet{
       DispatchQueue.main.async {
-         self.commentTableView.reloadData()
+        self.commentTableView.reloadData()
+        self.commentTableView.reloadData()
       }
     }
   }
+  private var refreshControl: UIRefreshControl!
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      getComments()
-      commentTextField.delegate = self
-      commentTableView.dataSource = self
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    getComments()
+    commentTextField.delegate = self
+    commentTableView.dataSource = self
+  }
   
   private func setUpAlertControl(title:String,message:String){
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -34,21 +36,28 @@ class CommentsViewController: UIViewController {
     alertController.addAction(okAction)
     present(alertController, animated: true, completion: nil)
   }
+  
   @IBAction func backButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
-  private func getComments(){
+  
+  private func setUpRefreshControl(){
+    refreshControl = UIRefreshControl()
+    commentTableView.refreshControl = refreshControl
+    refreshControl.addTarget(self, action: #selector(getComments), for: .valueChanged)
+  }
+  
+  @objc private func getComments(){
     UsersApiClient.fetchComments { (error, comments) in
       if let error = error {
         print(error.errorMessage())
       }
       if let comments = comments {
         self.comments = comments
-        dump(comments)
       }
     }
   }
-  }
+}
 extension CommentsViewController:UITextFieldDelegate{
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     guard let comment = commentTextField.text else {fatalError()}
@@ -96,4 +105,4 @@ extension CommentsViewController:UITableViewDataSource{
 }
 
 
- 
+
