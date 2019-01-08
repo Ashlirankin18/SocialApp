@@ -10,7 +10,7 @@ import Foundation
 
 public final class NetworkHelper {
   private init() {
-    let cache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 10 * 1024 * 1024, diskPath: nil)
+    let cache = URLCache(memoryCapacity: 30 * 1024 * 1024, diskCapacity: 30 * 1024 * 1024, diskPath: nil)
     URLCache.shared = cache
   }
   public static let shared = NetworkHelper()

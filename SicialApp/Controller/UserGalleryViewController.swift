@@ -10,12 +10,12 @@ import UIKit
 
 class UserGalleryViewController: UIViewController {
   @IBOutlet weak var userGallaryCollectionView: UICollectionView!
-  
+  var isLiked = false
   private var galleryImages = [ImageQualities]() {
     didSet {
       DispatchQueue.main.async {
         self.userGallaryCollectionView.reloadData()
-      }
+    }
     }
   }
   override func viewDidLoad() {
@@ -36,15 +36,37 @@ class UserGalleryViewController: UIViewController {
   private func makeList(_ n: Int) -> [Int]{
     return (0..<n).map{_ in Int.random( in: 1...2000) }
   }
+  func setLike(button:UIButton){
+    if !isLiked {
+      button.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (4).png"), for: .normal)
+      guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+      if let likeUnwrapped = like.first {
+        guard let likeInt = Int(likeUnwrapped) else {return}
+        let increasedLike = likeInt + 1
+        button.setTitle("\(increasedLike) Likes", for: .normal)
+        isLiked = true
+      }
+    } else {
+      button.setImage(nil, for: .normal)
+      guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+      if let likeUnwrapped = like.first {
+        guard let likeInt = Int(likeUnwrapped) else {return}
+        let decreasedLike = likeInt - 1
+        button.setTitle("\(decreasedLike) Likes", for: .normal)
+        isLiked = false
+    }
+    }
+  }
   
   @IBAction func likeButtonPressed(_ sender: UIButton) {
-    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (3).png"), for: .normal)
-    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
-    if let likeUnwrapped = like.first {
-      guard let likeInt = Int(likeUnwrapped) else {return}
-      let increasedLike = likeInt + 1
-      sender.setTitle("\(increasedLike) Likes", for: .normal)
-    }
+//    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (4).png"), for: .normal)
+//    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
+//    if let likeUnwrapped = like.first {
+//      guard let likeInt = Int(likeUnwrapped) else {return}
+//      let increasedLike = likeInt + 1
+//      sender.setTitle("\(increasedLike) Likes", for: .normal)
+//    }
+    setLike(button: sender)
   }
   
   private func getUserGalleryImages(id:Int,imageView:UIImageView){

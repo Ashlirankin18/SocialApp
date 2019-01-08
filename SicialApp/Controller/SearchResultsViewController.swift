@@ -38,6 +38,7 @@ class SearchResultsViewController: UIViewController {
       }
     }
   }
+  
 }
 extension SearchResultsViewController: UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

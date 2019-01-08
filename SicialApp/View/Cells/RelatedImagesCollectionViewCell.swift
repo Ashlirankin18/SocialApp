@@ -11,5 +11,6 @@ import UIKit
 class RelatedImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
   
 }

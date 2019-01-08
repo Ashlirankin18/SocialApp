@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
   var name = String()
   var profileImage = UIImage()
   var user: User?
+  var isPostLiked = false
   private var posts = [PostInfo]() {
     didSet {
       DispatchQueue.main.async {
@@ -37,15 +38,32 @@ class ProfileViewController: UIViewController {
     super.viewWillAppear(true)
     setUserUi()
   }
+  func setLike(button:UIButton){
+    if !isPostLiked {
+      button.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-25.png"), for: .normal)
+      guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+      if let likeUnwrapped = like.first {
+        guard let likeInt = Int(likeUnwrapped) else {return}
+        let increasedLike = likeInt + 1
+        button.setTitle("\(increasedLike) Likes", for: .normal)
+        isPostLiked = true
+      }
+    } else {
+      button.setImage(#imageLiteral(resourceName: "icons8-heart-outline-25.png"), for: .normal)
+      guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+      if let likeUnwrapped = like.first {
+        guard let likeInt = Int(likeUnwrapped) else {return}
+        let decreasedLike = likeInt - 1
+        button.setTitle("\(decreasedLike) Likes", for: .normal)
+        isPostLiked = false
+      }
+    }
+  }
+
   @IBAction func likeButton(_ sender: UIButton) {
-    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-25.png"), for: .normal)
-    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
-    if let likeUnwrapped = like.first {
-      guard let likeInt = Int(likeUnwrapped) else {return}
-      let increasedLike = likeInt + 1
-      sender.setTitle("\(increasedLike) Likes", for: .normal)
+    setLike(button: sender)
   }
-  }
+
   private func getPost(){
     UsersApiClient.getUserPost(numberOfResults: 20) { (error, posts) in
       if let error = error {
@@ -117,14 +135,13 @@ extension ProfileViewController: UICollectionViewDataSource {
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let numberOfLikes = makeList(posts.count)
-    let numberOfComments = makeList(posts.count)
     let post = posts[indexPath.row].attributes
     guard let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: "postCell", for: indexPath) as? ProfileCollectionViewCell else {fatalError("No cell found")}
     cell.userPost.text = post.story_text
     cell.profileImage.image = profileImage
     cell.userName.text = name
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
-    cell.comment.setTitle("\(numberOfComments[indexPath.row]) Comments", for: .normal)
+    cell.comment.setTitle("Comments", for: .normal)
     cell.publishedDate.text = convertTheDate(timeInterval: Double(post.publish_date)!)
     return cell
   }

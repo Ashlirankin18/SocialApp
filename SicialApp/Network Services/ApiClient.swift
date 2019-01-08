@@ -90,5 +90,38 @@ final class UsersApiClient {
       }
     }
   }
+  static func sendFavLike(data:Data,completionHandler: @escaping (AppError?,Bool) -> Void){
+    let urlString = "https://5c33f2b0e0948000147a7865.mockapi.io/favorite"
+    NetworkHelper.shared.performUploadTask(endpointURLString: urlString, httpMethod: "POST", httpBody: data) { (error, data, httpResponse) in
+      if let error = error{
+        completionHandler(error,false)
+      }
+      guard let response = httpResponse, (200...299).contains(response.statusCode) else {
+        let statusCode = httpResponse?.statusCode ?? -999
+        completionHandler(AppError.badStatusCode(String(statusCode)), false)
+        return
+        
+      }
+      if let _ = data {
+        completionHandler(nil,true)
+      }
+    }
+  }
+  static func getFavPosts(completionHandler: @escaping (AppError?,[FavoritePost]?) -> Void){
+    let urlString = "https://5c33f2b0e0948000147a7865.mockapi.io/favorite"
+    NetworkHelper.shared.performDataTask(endpointURLString: urlString, httpMethod: "GET", httpBody: nil) { (error, data, response) in
+      if let error = error {
+        completionHandler(error,nil)
+      }
+      if let data = data {
+        do{
+          let favPostData = try JSONDecoder().decode([FavoritePost].self, from:data)
+          completionHandler(nil,favPostData)
+        } catch{
+          completionHandler(AppError.decodingError(error),nil)
+        }
+      }
+    }
+  }
 }
 

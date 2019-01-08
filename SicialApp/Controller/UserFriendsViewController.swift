@@ -21,12 +21,14 @@ class UserFriendsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getuserFriends()
+   // getuserFriends()
     userFriendsTableView.dataSource = self
   }
-  
+  override func viewWillAppear(_ animated: Bool) {
+    getuserFriends()
+  }
   private func getuserFriends(){
-    UsersApiClient.getUserInfo(numberOfResults: 1200) { (error, friends) in
+    UsersApiClient.getUserInfo(numberOfResults: 200) { (error, friends) in
       if let error = error {
         print(error.errorMessage())
       }
@@ -46,9 +48,8 @@ class UserFriendsViewController: UIViewController {
         print(error.errorMessage())
       }
       if let image = image {
-        imageView.image = image
         DispatchQueue.main.async {
-          self.userFriendsTableView.reloadData()
+            imageView.image = image
         }
       }
     }

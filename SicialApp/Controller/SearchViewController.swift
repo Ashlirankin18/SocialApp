@@ -10,8 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
   @IBOutlet weak var userImagesCollectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
-  
-  
+  var isLiked = false
   private var allPlatformImages = [ImageQualities](){
     didSet{
       DispatchQueue.main.async{
@@ -29,9 +28,11 @@ class SearchViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     getUsers()
-    getImageData()
     searchBar.delegate = self
     userImagesCollectionView.dataSource = self
+  }
+  @IBAction func saveButtonPressed(_ sender: UIButton) {
+    
   }
   
   private func getUsers(){
@@ -46,14 +47,30 @@ class SearchViewController: UIViewController {
     }
   }
   @IBAction func likeButton(_ sender: UIButton) {
-    sender.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (3).png"), for: .normal)
-    guard let like = sender.currentTitle?.components(separatedBy: " " ) else {return}
-    if let likeUnwrapped = like.first {
-      guard let likeInt = Int(likeUnwrapped) else {return}
-      let increasedLike = likeInt + 1
-      sender.setTitle("\(increasedLike) Likes", for: .normal)
+    setLike(button: sender)
   }
-  }
+
+    func setLike(button:UIButton){
+      if !isLiked {
+        button.setImage(#imageLiteral(resourceName: "icons8-heart-outline-filled-50 (4).png"), for: .normal)
+        guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+        if let likeUnwrapped = like.first {
+          guard let likeInt = Int(likeUnwrapped) else {return}
+          let increasedLike = likeInt + 1
+          button.setTitle("\(increasedLike) Likes", for: .normal)
+          isLiked = true
+        }
+      } else {
+        button.setImage(nil, for: .normal)
+        guard let like = button.currentTitle?.components(separatedBy: " " ) else {return}
+        if let likeUnwrapped = like.first {
+          guard let likeInt = Int(likeUnwrapped) else {return}
+          let decreasedLike = likeInt - 1
+          button.setTitle("\(decreasedLike) Likes", for: .normal)
+          isLiked = false
+        }
+      }
+    }
   private func getImageData(){
     UsersApiClient.getRelatedImages { (error, imageQualities) in
       if let error = error {
@@ -94,7 +111,14 @@ extension SearchViewController:UICollectionViewDataSource{
     
     return cell
   }
+  private func setUpAlertControl(title:String,message:String){
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "Ok", style: .default) { alert in }
+    alertController.addAction(okAction)
+    present(alertController, animated: true, completion: nil)
+  }
 }
+
 
 extension SearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

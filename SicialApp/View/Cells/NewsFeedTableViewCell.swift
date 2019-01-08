@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewFeedTableViewCell: UITableViewCell {
+class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var likeButton: UIButton!

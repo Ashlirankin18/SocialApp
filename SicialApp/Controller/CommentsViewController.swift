@@ -74,9 +74,7 @@ extension CommentsViewController:UITextFieldDelegate{
           }
         }
         else if sucess {
-          DispatchQueue.main.async{
-            self.setUpAlertControl(title: "Sucess", message: "Sucessfully Commented")
-          }
+          print("Sucess!")
         }
         else {
           DispatchQueue.main.async {
@@ -88,6 +86,10 @@ extension CommentsViewController:UITextFieldDelegate{
       print("Encoding Error: \(error)")
     }
     getComments()
+    
+    return true
+  }
+  func textFieldShouldClear(_ textField: UITextField) -> Bool {
     return true
   }
 }
