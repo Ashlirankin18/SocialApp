@@ -57,9 +57,10 @@ class NewsFeedViewController: UIViewController {
   guard let indexPath = newsFeedTableView.indexPathForSelectedRow,
     let cell = newsFeedTableView.cellForRow(at: indexPath) as? NewsFeedTableViewCell else {return}
     let user = allUsers[indexPath.row]
+    let userName = "\(user.name.first.capitalized) \(user.name.last.capitalized)"
  guard let post:String  = cell.userPost.text,
   let date:String = cell.postPublishedData.text else {return}
-    let favorite = FavoritePost.init(like: "Ashli Rankin", publish_date: post, story_text: date, userImage: user.picture.large.absoluteString)
+    let favorite = FavoritePost.init(like: userName, publish_date: date, story_text: post, userImage: user.picture.large.absoluteString)
     do{
       let data = try JSONEncoder().encode(favorite)
       UsersApiClient.sendFavLike(data: data) { (error, sucess) in

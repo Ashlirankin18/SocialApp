@@ -62,6 +62,7 @@ extension FavoritesViewController:UICollectionViewDataSource{
       cell.pubilshedDate.text = fav.publish_date
       cell.userPost.text = fav.story_text
       return cell
-    }
   }
+    }
+  
 
