@@ -8,3 +8,4 @@ This Application is currently in the refactoring process:
   - A blank proflie state will be implemented to allow users to set their prefrences.
   - Provide alerts to users for possible error cases.
   
+![gif](https://github.com/Ashlirankin18/SocialApp/blob/master/SicialApp/Images/SocialAppSemo.gif)  
