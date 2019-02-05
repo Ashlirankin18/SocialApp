@@ -31,10 +31,33 @@ class SearchViewController: UIViewController {
     searchBar.delegate = self
     userImagesCollectionView.dataSource = self
   }
+  private func setUpAlertControl(title:String,message:String){
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "Ok", style: .default) { alert in }
+    alertController.addAction(okAction)
+    present(alertController, animated: true, completion: nil)
+  }
   @IBAction func saveButtonPressed(_ sender: UIButton) {
     
+    let image = allPlatformImages[sender.tag]
+    let favoriteImage = FavoritePost.init(like: "Ashli Rankin", publish_date: "", story_text: image.filename, userImage: "\(image.id)")
+    do {
+      let data = try JSONEncoder().encode(favoriteImage)
+      UsersApiClient.sendFavLike(data: data) { (error, sucess) in
+        if let error = error{
+          self.setUpAlertControl(title: "Error", message: error.errorMessage())
+        }
+        else if sucess {
+          self.setUpAlertControl(title: "Sucess", message: "Sucessfully Faved")
+        }
+      }
+    } catch {
+      self.setUpAlertControl(title: "No Go", message: " Error")
+    }
+    
+
   }
-  
+ 
   private func getUsers(){
     UsersApiClient.getUserInfo(numberOfResults: 993) { (error, users) in
       if let error = error {
@@ -108,14 +131,8 @@ extension SearchViewController:UICollectionViewDataSource{
     guard let cell = userImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as? RelatedImagesCollectionViewCell else {fatalError("No cell found")}
     cell.likeButton.setTitle("\(numberOfLikes[indexPath.row]) Likes", for: .normal)
     searchImages(id: allPlatformImages[indexPath.row].id, imageView: cell.userImage)
-    
+    cell.saveButton.tag = indexPath.row
     return cell
-  }
-  private func setUpAlertControl(title:String,message:String){
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "Ok", style: .default) { alert in }
-    alertController.addAction(okAction)
-    present(alertController, animated: true, completion: nil)
   }
 }
 
